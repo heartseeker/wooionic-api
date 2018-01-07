@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 
 var port = process.env.PORT || 8000; 
 
+var url = require('url');
+
 var wooCommerce = require('../settings/woo-commerce.js').wooCommerce;
 
 // configure app to use bodyParser()
@@ -28,7 +30,10 @@ router.get('/orders', function (req, res) {
 });
 
 router.get('/products', function (req, res) {
-    wooCommerce.getAsync('products').then(function(result) {
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.search;
+
+    wooCommerce.getAsync('products' + query).then(function(result) {
         res.json(JSON.parse(result.toJSON().body));
     });
 });
