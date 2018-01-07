@@ -49,7 +49,7 @@ router.get('/products/categories', function (req, res) {
     var url_parts = url.parse(req.url, true);
     var query = url_parts.search;
 
-    wooCommerce.getAsync('products' + query).then(function(result) {
+    wooCommerce.getAsync('products/categories' + query).then(function(result) {
         res.json(JSON.parse(result.toJSON().body));
     });
 });
