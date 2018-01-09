@@ -42,6 +42,17 @@ router.get('/products', function (req, res) {
     });
 });
 
+// search products
+//========================================================================
+router.get('/products/search/:q', function (req, res) {
+
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.search;
+
+    wooCommerce.getAsync('products?filter[q]=' + req.params.id + query).then(function(result) {
+        res.json(JSON.parse(result.toJSON().body));
+    });
+});
 
 // product reviews
 //========================================================================
