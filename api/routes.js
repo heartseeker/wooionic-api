@@ -35,6 +35,18 @@ router.post('/auth', function (req, res) {
     });
 });
 
+// get customer details
+//========================================================================
+router.get('/customers/:id', function (req, res) {
+
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.search;
+
+    wooCommerce.getAsync('customers/' + req.params.id + query).then(function(result) {
+        res.json(JSON.parse(result.toJSON().body));
+    });
+});
+
 
 // products
 //========================================================================
