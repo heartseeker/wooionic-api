@@ -23,11 +23,11 @@ router.get('/', function (req, res) {
     res.send('woocommerce api home');
 });
 
-router.get('/orders', function (req, res) {
-    wooCommerce.getAsync('orders').then(function(result) {
-        res.json(JSON.parse(result.toJSON().body));
-    });
-});
+// router.get('/orders', function (req, res) {
+//     wooCommerce.getAsync('orders').then(function(result) {
+//         res.json(JSON.parse(result.toJSON().body));
+//     });
+// });
 
 
 // products
