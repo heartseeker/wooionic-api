@@ -8,6 +8,8 @@ var port = process.env.PORT || 8000;
 
 var url = require('url');
 
+var request = require('request');
+
 var wooCommerce = require('../settings/woo-commerce.js').wooCommerce;
 
 // configure app to use bodyParser()
@@ -23,11 +25,15 @@ router.get('/', function (req, res) {
     res.send('woocommerce api home');
 });
 
-// router.get('/orders', function (req, res) {
-//     wooCommerce.getAsync('orders').then(function(result) {
-//         res.json(JSON.parse(result.toJSON().body));
-//     });
-// });
+
+router.post('/auth', function (req, res) {
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    request('http://api.ionicwoo.com/api/auth/generate_auth_cookie/?insecure=cool&username=' + username + '&password=' + password, function (error, response, body) {
+      res.status(200).send(JSON.parse(body));
+    });
+});
 
 
 // products
