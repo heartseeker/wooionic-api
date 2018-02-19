@@ -108,4 +108,17 @@ router.get('/orders', function (req, res) {
     });
 });
 
+
+// creating orders
+//========================================================================
+router.post('/orders', function (req, res) {
+
+    var url_parts = url.parse(req.url, true);
+    var query = url_parts.search;
+
+    wooCommerce.postAsync('orders', req.body).then(function(result) {
+        res.json(JSON.parse(result.toJSON().body));
+    });
+});
+
 module.exports = router;
